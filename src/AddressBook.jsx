@@ -1,6 +1,16 @@
 var React = require('react');
+var AddressListing = require('./AddressListing.jsx');
 
 module.exports  = React.createClass({
+  // This is the heart of everything, the single source of truth, the app database
+  getInitialState: function() {
+    return {
+      contacts: [
+        {firstname: "John", lastname: "Keller", phone: "050-233456"},
+        {firstname: "Mark", lastname: "Miller", phone: "050-3435353"},
+        {firstname: "Ada", lastname: "Malkoller", phone: "050-262662"}]
+      };
+  },
   render: function() {
     return (
       <div>
@@ -15,28 +25,7 @@ module.exports  = React.createClass({
                     </div>
                   </div>
                 </div>
-                <table className="ink-table">
-                  <thead>
-                    <tr>
-                      <th className="align-left">Name</th>
-                      <th className="align-left">Phone</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>John Sepponen</td>
-                      <td>938382</td>
-                    </tr>
-                    <tr>
-                      <td>Mark Mulligan</td>
-                      <td>8428432</td>
-                    </tr>
-                    <tr>
-                      <td>Jarmo Helinen</td>
-                      <td>4242824</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <AddressListing contacts={this.state.contacts}/>
                 <button className="ink-button red push-right small">Enable deletes</button>
                 <div>This book has<span className="ink-badge blue">39</span> contacts</div>
               </div>
