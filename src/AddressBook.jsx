@@ -1,5 +1,6 @@
 var React = require('react');
 var AddressListing = require('./AddressListing.jsx');
+var AddressBookStatistics = require('./AddressBookStatistics.jsx');
 
 module.exports  = React.createClass({
   // This is the heart of everything, the single source of truth, the app database
@@ -10,6 +11,9 @@ module.exports  = React.createClass({
         {firstname: "Mark", lastname: "Miller", phone: "050-3435353"},
         {firstname: "Ada", lastname: "Malkoller", phone: "050-262662"}]
       };
+  },
+  countContacts: function() {
+    return this.state.contacts.length;
   },
   render: function() {
     return (
@@ -27,7 +31,7 @@ module.exports  = React.createClass({
                 </div>
                 <AddressListing contacts={this.state.contacts}/>
                 <button className="ink-button red push-right small">Enable deletes</button>
-                <div>This book has<span className="ink-badge blue">39</span> contacts</div>
+                <AddressBookStatistics contactCount={this.countContacts()}/>
               </div>
               <div className="all-50">
                 <div className="ink-form">
