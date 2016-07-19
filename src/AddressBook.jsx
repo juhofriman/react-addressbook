@@ -2,6 +2,7 @@ var React = require('react');
 var AddressListing = require('./AddressListing.jsx');
 var AddressBookStatistics = require('./AddressBookStatistics.jsx');
 var AddressBookHotSearch = require('./AddressBookHotSearch.jsx');
+var NewContactForm = require('./NewContactForm.jsx');
 var eb = require('./eventbus.js');
 
 module.exports  = React.createClass({
@@ -17,6 +18,10 @@ module.exports  = React.createClass({
   componentDidMount: function() {
     eb.on(this, 'HOTSEARCH_CHANGE', function(currentSearch) {
       this.setState({hotsearch: currentSearch});
+    });
+    eb.on(this, 'CREATE_NEW_CONTACT', function(newContact) {
+      var c = this.state.contacts;
+      this.setState({contacts: c.concat([newContact])});
     });
   },
   filteredContacts: function() {
@@ -45,25 +50,7 @@ module.exports  = React.createClass({
               <div className="all-50">
                 <div className="ink-form">
                   <h4>Add new contact</h4>
-                  <div className="control-group column-group">
-                      <label htmlFor="first-name" className="all-20">First name</label>
-                      <div className="control all-80">
-                          <input type="text" name="first-name" id="first-name"/>
-                      </div>
-                  </div>
-                  <div className="control-group column-group">
-                      <label htmlFor="first-name" className="all-20">Last name</label>
-                      <div className="control all-80">
-                          <input type="text" name="last-name" id="last-name"/>
-                      </div>
-                  </div>
-                  <div className="control-group column-group">
-                      <label htmlFor="phone" className="all-20">Phone</label>
-                      <div className="control all-80">
-                          <input type="text" name="phone" id="phone"/>
-                      </div>
-                  </div>
-                  <button className="ink-button red">Add</button>
+                  <NewContactForm/>
                 </div>
               </div>
             </div>
