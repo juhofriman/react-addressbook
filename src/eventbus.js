@@ -13,7 +13,6 @@ var eventbusState = {};
     }
     eventbusState.on = function(tr, id, fn) {
       handlers[id] = { thisRef: tr, func: fn};
-      console.log(handlers);
     }
 
     module.exports.publish = eventbusState.publish;
