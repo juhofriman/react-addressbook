@@ -19,6 +19,9 @@ module.exports  = React.createClass({
     // Trust the state!
     eb.publish('CREATE_NEW_CONTACT');
   },
+  commitButtonClasses: function() {
+    return "ink-button push-right " + (this.props.canCommit ? 'green' : 'red');
+  },
   render: function() {
     return (
       <div>
@@ -40,7 +43,7 @@ module.exports  = React.createClass({
                 <FormInput type="text" id="phone" value={this.props.data.phone}/>
             </div>
         </div>
-        <button className="ink-button red push-right" onClick={this.addNewContact}>Add</button>
+        <button className={this.commitButtonClasses()} disabled={!this.props.canCommit} onClick={this.addNewContact}>Add</button>
       </div>
     );
   }

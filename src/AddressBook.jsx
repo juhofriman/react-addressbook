@@ -23,7 +23,6 @@ module.exports  = React.createClass({
       }};
   },
   componentDidMount: function() {
-
     eb.on(this, 'HOTSEARCH_CHANGE', function(currentSearch) {
       console.log('Dude! Hotsearch form change was received. Setting state.');
       this.setState({hotsearch: currentSearch});
@@ -62,6 +61,11 @@ module.exports  = React.createClass({
   countContacts: function() {
     return this.state.contacts.length;
   },
+  canCommitAddNewContactForm: function() {
+    return this.state.forms.addNewContact.firstname !== '' &&
+      this.state.forms.addNewContact.lastname !== '' &&
+      this.state.forms.addNewContact.phone !== '';
+  },
   render: function() {
     return (
       <div>
@@ -77,7 +81,7 @@ module.exports  = React.createClass({
               <div className="all-50">
                 <div className="ink-form">
                   <h4>Add new contact</h4>
-                  <NewContactForm data={this.state.forms.addNewContact}/>
+                  <NewContactForm data={this.state.forms.addNewContact} canCommit={this.canCommitAddNewContactForm()}/>
                 </div>
               </div>
             </div>
